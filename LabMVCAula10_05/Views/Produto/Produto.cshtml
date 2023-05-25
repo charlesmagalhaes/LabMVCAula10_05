@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "Produto";
+}
+@using LabMVCAula10_05.Models;
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Teste</title>
+    <style>
+        .quadro {
+            margin: 10PX;
+            padding: 10PX;
+            width: 300px;
+            height: auto;
+            border: 2px solid black;
+            position: relative;
+            background-color: lightslategray;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <h2>Cadastrado de Produtos</h2>
+
+    <div style="background-color: #BBDEFB; padding: 4px; border-radius: 10px">
+        <form method="post" action="@Url.Action("Salvar", "Produto")" style="padding:10px 2px; margin:4px">
+            <div class="form-group">
+                <label for="Nome">Nome:</label>
+                <input class="form-control" type="text" id="Nome" name="Nome" required placeholder="Digite o nome do Produto">
+            </div>
+            <div class="form-group">
+                <label for="Descricao">Descricao:</label>
+                <input class="form-control" type="text" id="Descricao" name="Descricao" required placeholder="Digite a descricao do produto">
+            </div>
+            <div class="form-group">
+                <label for="Preco">Preco:</label>
+                <input class="form-control" type="text" id="Preco" name="Preco" placeholder="Digite o preco">
+                <small id="emailHelp" class="form-text text-muted">Digite o preco do produto</small>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Cadastrar">
+        </form>
+    </div>
+
+    <h2>Lista de Produtos Cadastrados</h2>
+    <div style="margin-top: 10px">
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>Descricao</th>
+                <th>Acao</th>
+            </tr>
+
+            @foreach (ProdutoModel produto in ViewBag.ListaProdutos)
+            {
+                <tr>
+                    <td>@produto.Nome</td>
+                    <td>@produto.Descricao</td>
+
+                    <td>
+                        <form method="post" action="">
+                            <input type="hidden" name="Matricula" value="" />
+                            <button class="btn btn-danger" type="submit">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+
+            </table>
+
+    </div>
+</body>
+    </html>
