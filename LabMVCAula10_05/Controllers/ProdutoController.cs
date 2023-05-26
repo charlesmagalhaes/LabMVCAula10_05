@@ -15,6 +15,8 @@ namespace LabMVCAula10_05.Controllers
     {
         public ApiService _apiService = new ApiService();
 
+        private readonly string urlProduto = "https://localhost:44395/api/Produto";
+
         public ProdutoController()
         {
             
@@ -22,16 +24,17 @@ namespace LabMVCAula10_05.Controllers
 
         public async Task<ActionResult> Produto()
         {
-            ViewBag.ListaProdutos = await _apiService.Get("https://localhost:44395/api/values");
+            ViewBag.ListaProdutos = await _apiService.Get(urlProduto);
+            ViewBag.ProdutoEmEdicaoId = false;
 
             return View(new ProdutoModel());
         }
 
-
+        [HttpPost]
         public async Task<ActionResult> Salvar(ProdutoModel produto)
         {
 
-            var response = await _apiService.Salvar("https://localhost:44395/api/values", produto);
+            var response = await _apiService.Salvar(urlProduto, produto);
             var responseData = await response.Content.ReadAsStringAsync();
             
 
@@ -41,15 +44,26 @@ namespace LabMVCAula10_05.Controllers
 
         public async Task<ActionResult> ExcluirProduto(int? id)
         {
-            var response = await _apiService.Excluir ("https://localhost:44395/api/values", id);
+            var response = await _apiService.Excluir (urlProduto, id);
             return RedirectToAction("Produto");
         }
 
-        [HttpPost]
-        public ActionResult EditarProduto(int id)
+        public ActionResult EditarProduto()
         {
-            ViewBag.ProdutoEmEdicaoId = id;
+            ViewBag.ProdutoEmEdicaoId = true;
 
+            return RedirectToAction("Produto");
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> SalvarEdicaoProduto(ProdutoModel produto)
+        {
+            var response = await _apiService.Atualizar(urlProduto, produto);
+            var responseData = await response.Content.ReadAsStringAsync();
+
+
+            // Trate a resposta recebida da API e retorne para a exibição
             return RedirectToAction("Produto");
         }
 
