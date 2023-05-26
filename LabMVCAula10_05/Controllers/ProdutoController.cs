@@ -39,5 +39,20 @@ namespace LabMVCAula10_05.Controllers
             return RedirectToAction("Produto");
         }
 
+        public async Task<ActionResult> ExcluirProduto(int? id)
+        {
+            var response = await _apiService.Excluir ("https://localhost:44395/api/values", id);
+            return RedirectToAction("Produto");
+        }
+
+        [HttpPost]
+        public ActionResult EditarProduto(int id)
+        {
+            ViewBag.ProdutoEmEdicaoId = id;
+
+            return RedirectToAction("Produto");
+        }
+
+
     }
 }
