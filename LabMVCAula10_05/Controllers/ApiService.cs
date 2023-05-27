@@ -65,12 +65,6 @@ namespace LabMVCAula10_05.Controllers
             return await _httpClient.DeleteAsync(deleteUrl);
         }
 
-        public async Task<HttpResponseMessage> Atualizar(string url, ProdutoModel produto)
-        {
-            var jsonContent = new StringContent(JsonConvert.SerializeObject(produto), Encoding.UTF8, "application/json");
-            return await _httpClient.PutAsync(url, jsonContent);
-        }
-
 
         private void ExibirMensagemErro(string mensagem)
         {
