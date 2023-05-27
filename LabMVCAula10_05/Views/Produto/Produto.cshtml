@@ -85,6 +85,8 @@
 
                         <form method="post" action="@Url.Action("EditarProduto", "Produto")">
                             <input type="hidden" name="id" value="@produto.Id" />
+                            <input type="hidden" name="nome" value="@produto.Nome" />
+                            <input type="hidden" name="descricao" value="@produto.Descricao" />
                             <button class="btn btn-primary" type="submit">Editar</button>
                         </form>
                     </td>

@@ -30,6 +30,7 @@ namespace LabMVCAula10_05.Controllers
             return View(new ProdutoModel());
         }
 
+
         [HttpPost]
         public async Task<ActionResult> Salvar(ProdutoModel produto)
         {
@@ -48,12 +49,17 @@ namespace LabMVCAula10_05.Controllers
             return RedirectToAction("Produto");
         }
 
-        public ActionResult EditarProduto()
+        [HttpPost]
+        public ActionResult EditarProduto(ProdutoModel produto)
         {
-            ViewBag.ProdutoEmEdicaoId = true;
+            var viewModel = new EditarProdutoViewModel
+            {
+                Produto = produto
+            };
 
-            return RedirectToAction("Produto");
+            return View(viewModel);
         }
+
 
 
         [HttpPost]
