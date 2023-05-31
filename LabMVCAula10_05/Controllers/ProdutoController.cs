@@ -24,8 +24,7 @@ namespace LabMVCAula10_05.Controllers
 
         public async Task<ActionResult> Produto()
         {
-            ViewBag.ListaProdutos = await _apiService.Get(urlProduto);
-            ViewBag.ProdutoEmEdicaoId = false;
+            ViewBag.ListaProdutos = await _apiService.GetLista(urlProduto);
 
             return View(new ProdutoModel());
         }
@@ -48,12 +47,32 @@ namespace LabMVCAula10_05.Controllers
             return RedirectToAction("Produto");
         }
 
-        public ActionResult EditarProduto()
-        {
-            ViewBag.ProdutoEmEdicaoId = true;
+        public async Task<ActionResult> GetProduto(int? id)
 
+        {
+
+            ViewBag.UmProduto = "xxxxxxxxxxxxxxxx";
             return RedirectToAction("Produto");
         }
+
+        public ActionResult EditarProduto(ProdutoModel produto)
+        {
+            ViewBag.Produto = new ProdutoModel()
+            {
+                Id = produto.Id,
+                Nome = produto.Nome,
+                Descricao = produto.Descricao
+            };
+
+            return View();
+        }
+
+        //[HttpPost]
+        //public ActionResult EditarProduto(ProdutoModel produto)
+        //{
+   
+        //    return View();
+        //}
 
 
         [HttpPost]
