@@ -22,6 +22,7 @@ namespace LabMVCAula10_05.Controllers
             
         }
 
+        [Route("Produto/")]
         public async Task<ActionResult> Produto()
         {
             ViewBag.ListaProdutos = await _apiService.GetLista(urlProduto);
@@ -29,6 +30,7 @@ namespace LabMVCAula10_05.Controllers
             return View(new ProdutoModel());
         }
 
+        [Route("Produto/")]
         [HttpPost]
         public async Task<ActionResult> Salvar(ProdutoModel produto)
         {
@@ -55,6 +57,7 @@ namespace LabMVCAula10_05.Controllers
             return RedirectToAction("Produto");
         }
 
+        [Route("Produto/Editar")]
         public ActionResult EditarProduto(ProdutoModel produto)
         {
             ViewBag.Produto = new ProdutoModel()
