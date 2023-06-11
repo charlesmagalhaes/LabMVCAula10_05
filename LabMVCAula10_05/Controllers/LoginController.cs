@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using LabMVCAula10_05.ModelViews;
 using LabMVCAula10_05.Request;
 
 namespace LabMVCAula10_05.Controllers
@@ -17,12 +14,18 @@ namespace LabMVCAula10_05.Controllers
 
         public ActionResult Logar(LoginRequest _login)
         {
-            if(_login.Login == null || _login.Senha == null)
+            if(_login.Login == null || string.IsNullOrEmpty(_login.Login) || string.IsNullOrEmpty(_login.Senha))
             {
-                return Redirect("/Login");
+                return View("index", new ErroModelView{ Mensagem = "Login ou senha invalida"});
             }
-            var login = _login;
-            return Redirect("/");
+
+            if(_login.Login == "charles" && _login.Senha == "123456")
+            {
+                Session["usuario_logado"] = _login;
+                return Redirect("/");
+            }
+            return View("index", new ErroModelView { Mensagem = "Login ou senha invalida"});
+  
         }
     }
 }

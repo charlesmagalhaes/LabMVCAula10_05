@@ -1,4 +1,5 @@
-﻿using LabMVCAula10_05.Models;
+﻿using LabMVCAula10_05.Filtros;
+using LabMVCAula10_05.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,12 @@ using System.Web.Mvc;
 
 namespace LabMVCAula10_05.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : LogadoController
     {
+        [AutenticadoFilter]
         public ActionResult Index()
         {
+            //if (!Logado()) return null;
             return View();
         }
 

@@ -2,6 +2,8 @@
     ViewBag.Title = "Login";
 }
 
+@using LabMVCAula10_05.ModelViews;
+
 
     <div class="jumbotron">
         <h1>Autenticacao</h1>
@@ -16,6 +18,12 @@
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control" id="exampleInputPassword1" name="senha" placeholder="Password">
             </div>
+            @if(Model != null && !string.IsNullOrEmpty(((ErroModelView)Model).Mensagem))
+            {<div class="alert alert-danger" role="alert">
+                     @(((ErroModelView)Model).Mensagem)
+            </div>
+
+            }
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
 

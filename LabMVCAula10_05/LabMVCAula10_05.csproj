@@ -138,7 +138,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ApiService.cs" />
+    <Compile Include="Filtros\AutenticadoFilter.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LogadoController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Global.asax.cs">
@@ -147,6 +149,7 @@
     <Compile Include="Models\Aluno.cs" />
     <Compile Include="Models\AlunoService.cs" />
     <Compile Include="Models\ProdutoModel.cs" />
+    <Compile Include="ModelViews\ErroModelView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request\LoginRequest.cs" />
   </ItemGroup>
@@ -193,6 +196,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Logado\" />
     <Folder Include="Views\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
