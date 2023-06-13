@@ -31,6 +31,7 @@ namespace LabMVCAula10_05.Controllers
             return View();
         }
 
+        [AutenticadoFilter]
         public ActionResult Cadastro()
         {
             ViewBag.NotasAlunos = Aluno.GetListaNotasAlunos();

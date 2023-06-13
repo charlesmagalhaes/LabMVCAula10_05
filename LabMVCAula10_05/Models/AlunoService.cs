@@ -17,33 +17,32 @@ namespace LabMVCAula10_05.Models
 
 
             public static void Salvar(Aluno aluno)
-
             {
-            var media = ObterMediaNotas(aluno.Notas);
+                var media = ObterMediaNotas(aluno.Notas);
 
-            aluno.Media = media;
-            aluno.Situacao = media < 5 ? Situacao.Reprovado : media >= 5 && media < 7 ? Situacao.Recuperacao : Situacao.Aprovado;
-            using (var connection = new NpgsqlConnection(ConnectionString))
+                aluno.Media = media;
+                aluno.Situacao = media < 5 ? Situacao.Reprovado : media >= 5 && media < 7 ? Situacao.Recuperacao : Situacao.Aprovado;
+                using (var connection = new NpgsqlConnection(ConnectionString))
                 {
-                    connection.Open();
-                    using (var command = new NpgsqlCommand())
-                    {
-                        try
+                        connection.Open();
+                        using (var command = new NpgsqlCommand())
                         {
-                            command.Connection = connection;
-                            command.CommandType = CommandType.Text;
+                            try
+                            {
+                                command.Connection = connection;
+                                command.CommandType = CommandType.Text;
 
-                            command.CommandText = $"INSERT INTO Aluno (nome, matricula, notas, media, situacao) VALUES ('{aluno.Nome}', '{aluno.Matricula}', '{aluno.Notas}', '{aluno.Media}', '{aluno.Situacao}')";
-                            command.ExecuteNonQuery(); 
-                            ExibirMensagemErro("Nota Cadastrada com sucesso!");
-                    }
-                        catch (Npgsql.PostgresException e)
-                        {
-                            // Trate a exceção de violação de campo único aqui
-                            // Por exemplo, você pode exibir uma mensagem de erro para o usuário informando que o campo já existe
-                           ExibirMensagemErro("Erro ao cadastrar aluno: " + e.Message);
+                                command.CommandText = $"INSERT INTO Aluno (nome, matricula, notas, media, situacao) VALUES ('{aluno.Nome}', '{aluno.Matricula}', '{aluno.Notas}', '{aluno.Media}', '{aluno.Situacao}')";
+                                command.ExecuteNonQuery(); 
+                                ExibirMensagemErro("Nota Cadastrada com sucesso!");
                         }
-                    }
+                            catch (Npgsql.PostgresException e)
+                            {
+                                // Trate a exceção de violação de campo único aqui
+                                // Por exemplo, você pode exibir uma mensagem de erro para o usuário informando que o campo já existe
+                               ExibirMensagemErro("Erro ao cadastrar aluno: " + e.Message);
+                            }
+                        }
                 }
             }
 

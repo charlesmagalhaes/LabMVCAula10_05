@@ -1,6 +1,10 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web;
+using System.Web.Mvc;
+using LabMVCAula10_05.Models;
 using LabMVCAula10_05.ModelViews;
 using LabMVCAula10_05.Request;
+using Newtonsoft.Json;
 
 namespace LabMVCAula10_05.Controllers
 {
@@ -19,9 +23,23 @@ namespace LabMVCAula10_05.Controllers
                 return View("index", new ErroModelView{ Mensagem = "Login ou senha invalida"});
             }
 
-            if(_login.Login == "charles" && _login.Senha == "123456")
+            Usuario usuario = new Usuario
             {
-                Session["usuario_logado"] = _login;
+                Senha = _login.Senha,
+                Login = _login.Login
+            };
+
+            if (usuario.VerificarUsuario())
+            {
+                var cookie = new HttpCookie("usuario_logado");
+                cookie.Value = JsonConvert.SerializeObject(_login);
+                cookie.Expires = DateTime.Now.AddDays(1);
+                cookie.HttpOnly = true;
+                Response.Cookies.Add(cookie);
+
+
+                
+                //Session["usuario_logado"] = _login;
                 return Redirect("/");
             }
             return View("index", new ErroModelView { Mensagem = "Login ou senha invalida"});

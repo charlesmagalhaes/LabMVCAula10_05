@@ -1,4 +1,5 @@
-﻿using LabMVCAula10_05.Models;
+﻿using LabMVCAula10_05.Filtros;
+using LabMVCAula10_05.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace LabMVCAula10_05.Controllers
             
         }
 
+        [AutenticadoFilter]
         [Route("Produto/")]
         public async Task<ActionResult> Produto()
         {

@@ -18,13 +18,14 @@
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control" id="exampleInputPassword1" name="senha" placeholder="Password">
             </div>
-            @if(Model != null && !string.IsNullOrEmpty(((ErroModelView)Model).Mensagem))
+            @if (Model != null && !string.IsNullOrEmpty(((ErroModelView)Model).Mensagem))
             {<div class="alert alert-danger" role="alert">
-                     @(((ErroModelView)Model).Mensagem)
-            </div>
+                    @(((ErroModelView)Model).Mensagem)
+                </div>
 
             }
             <button type="submit" class="btn btn-primary">Login</button>
+            <a href="/usuario" class="btn btn-primary">Cadastrar</a>
         </form>
 
     </div>
